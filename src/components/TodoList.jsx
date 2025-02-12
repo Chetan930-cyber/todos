@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { add, remove, setEdit, update } from "../redux/todoSlice";
+import { add, remove, setEdit, update } from "../redux/TodoSlice";
 
 const TodoList = () => {
   const dispatch = useDispatch();
