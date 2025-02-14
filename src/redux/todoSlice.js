@@ -1,13 +1,10 @@
-// src/redux/todoSlice.jsx
-
 import { createSlice } from "@reduxjs/toolkit";
 
-const TodoSlice = createSlice({
+const todoSlice = createSlice({
   name: "todos",
   initialState: {
-    allTodos: [{ id: 1, text: "Something Here" }],
-    theme: "light", // Default theme
-    cryptoId: null, // Initial cryptoId as a number or null
+    allTodos: [{ id: "1", text: "Sample Task" }],
+    theme: "light",
     edit: { isEdit: false, todo: {} },
   },
   reducers: {
@@ -21,19 +18,16 @@ const TodoSlice = createSlice({
       state.allTodos = state.allTodos.filter((item) => item.id !== action.payload);
     },
     setEdit: (state, action) => {
-      state.edit = { todo: action.payload, isEdit: true };
+      state.edit = { isEdit: true, todo: action.payload };
     },
     update: (state, action) => {
       state.allTodos = state.allTodos.map((item) =>
         item.id === action.payload.id ? action.payload : item
       );
-      state.edit = { todo: {}, isEdit: false };
-    },
-    setCryptoId: (state, action) => {
-      state.cryptoId = Number(action.payload); // Convert payload to number
+      state.edit = { isEdit: false, todo: {} };
     },
   },
 });
 
-export const { toggleTheme, add, remove, setEdit, update, setCryptoId } = TodoSlice.actions;
-export default TodoSlice.reducer;
+export const { toggleTheme, add, remove, setEdit, update } = todoSlice.actions;
+export default todoSlice.reducer;
