@@ -20,7 +20,7 @@ const ColorfulForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-lg w-full">
+    <form onSubmit={handleSubmit} className="bg-white mt-3 p-6 rounded-lg shadow-lg w-full">
       <h2 className="text-3xl text-center text-gray-800 mb-4">Colorful Form</h2>
 
       {/* Input Field */}
