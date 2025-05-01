@@ -5,18 +5,22 @@ import { add, update } from "../redux/todoSlice";
 const ColorfulForm = () => {
   const { edit } = useSelector((state) => state.todos);
   const dispatch = useDispatch();
-  const [text, setText] = useState("");
+  const [formData, setFormData] = useState({ text: "" });
 
   useEffect(() => {
-    setText(edit.isEdit ? edit.todo.text : "");
+    setFormData({ text: edit.isEdit ? edit.todo.text : "" }); // isse edit button click krne pr automatically wo text input me dikh jaye
   }, [edit]);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     edit.isEdit
-      ? dispatch(update({ id: edit.todo.id, text }))
-      : dispatch(add({ id: crypto.randomUUID(), text }));
-    setText("");
+      ? dispatch(update({ id: edit.todo.id, text: formData.text }))
+      : dispatch(add({ id: crypto.randomUUID(), text: formData.text }));
+    setFormData({ text: "" });
   };
 
   return (
@@ -26,10 +30,11 @@ const ColorfulForm = () => {
       {/* Input Field */}
       <input
         type="text"
+        name="text"
         className="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500 transition duration-300"
         placeholder="Type something..."
-        onChange={(e) => setText(e.target.value)}
-        value={text}
+        onChange={handleChange}
+        value={formData.text}
       />
 
       {/* Submit Button */}
